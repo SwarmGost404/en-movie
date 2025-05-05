@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import axios, { AxiosResponse } from 'axios';
+import { Link } from "react-router-dom";
 
 enum Difficulty {
   Easy = "easy",
@@ -34,9 +35,9 @@ interface LevelEnProps {
 }
 
 const LevelEn: React.FC<LevelEnProps> = ({ level }) => {
-  const URL = "/back.json"; // Type inferred as string
+  const URL: string = "/back.json"; // Потом заменить на http:localhost:8080/movie/recom
   const [movieData, setMovieData] = useState<MovieData | null>(null);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
 
   const fetchData = async () => {
@@ -71,20 +72,22 @@ const LevelEn: React.FC<LevelEnProps> = ({ level }) => {
       <h2 className="text-xl font-bold mb-4">Movies for {level} level:</h2>
       
       {filteredMovies.length > 0 ? (
-        <ul className="space-y-4">
+        <ul className="  space-y-4">
           {filteredMovies.map(movie => (
-            <li key={movie.id} className="border p-4 rounded-lg">
-              <h3 className="text-lg font-semibold">{movie.title}</h3>
-              <div className="mt-2">
-                <span className="font-medium">Topics:</span>
-                <div className="flex flex-wrap gap-2 mt-1">
-                  {movie.topics.map(topic => (
-                    <span key={topic} className=" px-2 py-1 rounded text-sm">
-                      {topic}
-                    </span>
-                  ))}
-                </div>
-              </div>
+            <li key={movie.id} className="border  p-4 rounded-lg">
+                <Link to={"/video/" + movie.id}>
+                <h3 className="text-lg font-semibold">{movie.title}</h3>
+                    <div className="mt-2">
+                        <span className="font-medium">Topics:</span>
+                        <div className="flex flex-wrap gap-2 mt-1">
+                        {movie.topics.map(topic => (
+                            <span key={topic} className="px-2 py-1 rounded text-sm">
+                            {topic}
+                            </span>
+                        ))}
+                        </div>
+                    </div>
+                </Link>
             </li>
           ))}
         </ul>

@@ -1,8 +1,8 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Home from './components/pages/Home';
 import Header from "./components/Header"
 import Player from './components/pages/Player.tsx';
 import Recommendations from './components/pages/Recommendations.tsx';
+import Footer from './components/Footer.tsx';
 
 function App() {
 
@@ -11,11 +11,10 @@ function App() {
     <BrowserRouter>
       <Header />
       <Routes>
-        <Route path='/' element={<Home />} />
+        <Route path='/' element={<Recommendations /> } />
         <Route path="/video/:id" element={<Player />} />
-        <Route path="/recom/" element={<Recommendations /> } />
       </Routes>
-    
+      <Footer />
     </BrowserRouter>
     
   )
