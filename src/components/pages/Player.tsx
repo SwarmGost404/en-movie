@@ -7,7 +7,7 @@ function Player() {
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
 
   return (
-    <main className="flex justify-center items-center ">
+    <main className="relative sm:mt-[20px] flex justify-center items-center ">
       <div className="relative top-0 left-0 w-full max-w-4xl">
         <ReactPlayer
           className="relative top-0 left-0 w-full h-full"
@@ -15,7 +15,7 @@ function Player() {
           height="100%"
           onClick={() => setIsPlaying(!isPlaying)}
           playing={isPlaying}
-          url={`http://localhost:8080/static/${id}.mp4`}
+          url={`http://localhost:8080/movie/${id}.mp4`}
           controls
           config={{
             file: {

@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 function Header () {
 
     return(
-        <header className="block sm:flex w-full h-[100px] sm:h-[55px] relative top-0 left-0 bg-amber-600 ">
+        <header className="flex w-full  h-[55px] relative top-0 left-0 bg-amber-600 ">
             <Link className="text-center w-full  text-[200%] " to="/">
                 EnEnglish
             </Link>
