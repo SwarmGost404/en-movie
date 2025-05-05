@@ -35,7 +35,7 @@ interface LevelEnProps {
 }
 
 const LevelEn: React.FC<LevelEnProps> = ({ level }) => {
-  const URL: string = "/back.json"; // Потом заменить на http:localhost:8080/movie/recom
+  const URL: string = "http://localhost:8080/back.json";
   const [movieData, setMovieData] = useState<MovieData | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
