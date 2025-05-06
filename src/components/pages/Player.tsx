@@ -15,7 +15,7 @@ function Player() {
           height="100%"
           onClick={() => setIsPlaying(!isPlaying)}
           playing={isPlaying}
-          url={`http://localhost:8080/movie/${id}.mp4`}
+          url={`http://localhost:8080/static/movie/${id}.mp4`}
           controls
           config={{
             file: {
