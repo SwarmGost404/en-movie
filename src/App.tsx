@@ -6,7 +6,6 @@ import Footer from './components/Footer.tsx';
 
 function App() {
 
-
   return (
     <BrowserRouter>
       <Header />
@@ -14,7 +13,7 @@ function App() {
         <Route path='/' element={<Recommendations /> } />
         <Route path="/video/:id" element={<Player />} />
       </Routes>
-      <Footer />
+      {/* <Footer /> */}
     </BrowserRouter>
     
   )

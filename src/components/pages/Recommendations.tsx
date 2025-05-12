@@ -31,7 +31,7 @@ function Recommendations() {
       </div>
       
       <div className="mt-8 text-center">
-        <LevelEn level={selectedLevel} />      </div>
+        <LevelEn level={selectedLevel} /></div>
     </main>
   );
 }

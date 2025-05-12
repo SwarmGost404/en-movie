@@ -65,7 +65,7 @@ const LevelEn = ({ level }: { level: Difficulty }) => {
                     {movie.topics.map(topic => (
                       <span 
                         key={topic} 
-                        className="px-2 py-1  rounded text-sm"
+                        className="px-2 py-1 f rounded text-sm"
                       >
                         {topic}
                       </span>
