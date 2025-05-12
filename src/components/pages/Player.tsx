@@ -1,38 +1,8 @@
 import { useState, useRef, useEffect } from "react";
-import { useParams } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import ReactPlayer from 'react-player'
 
-
-
 function Player() {
-  const useInactivityAlert = (timeout = 3000) => {
-    useEffect(() => {
-      let inactivityTimer: NodeJS.Timeout;
-  
-      const resetTimer = () => {
-        setViser(true)
-        clearTimeout(inactivityTimer);
-        inactivityTimer = setTimeout(() => {
-          setViser(!viser)
-        }, timeout);
-      };
-      resetTimer();
-      const events = ['mousemove', 'mousedown', 'keydown', 'touchmove', 'scroll'];
-      events.forEach(event => {
-        window.addEventListener(event, resetTimer);
-      });
-  
-      return () => {
-        clearTimeout(inactivityTimer);
-        events.forEach(event => {
-          window.removeEventListener(event, resetTimer);
-        });
-      };
-    }, [timeout]);
-  };
-  
-  useInactivityAlert();
 
   const navigate = useNavigate()
 
@@ -85,6 +55,34 @@ function Player() {
     setProgress(state.played * 100);
   };
 
+  const useInactivity = (timeout = 3000) => {
+    useEffect(() => {
+      let inactivityTimer: NodeJS.Timeout;
+  
+      const resetTimer = () => {
+        setViser(true)
+        clearTimeout(inactivityTimer);
+        inactivityTimer = setTimeout(() => {
+          setViser(!viser)
+        }, timeout);
+      };
+      resetTimer();
+      const events = ['mousemove', 'mousedown', 'keydown', 'touchmove', 'scroll'];
+      events.forEach(event => {
+        window.addEventListener(event, resetTimer);
+      });
+  
+      return () => {
+        clearTimeout(inactivityTimer);
+        events.forEach(event => {
+          window.removeEventListener(event, resetTimer);
+        });
+      };
+    }, [timeout]);
+  };
+  
+  useInactivity();
+
   const handleSeek = (e: React.ChangeEvent<HTMLInputElement>) => {
     const seekTo = parseFloat(e.target.value);
     setProgress(seekTo);
@@ -136,6 +134,7 @@ function Player() {
 
   return (
     <main ref={playerContainerRef} className="h-screen overflow-hidden bg-black absolute top-0 left-0 w-full justify-center items-center ">
+      
       <div
         className="relative top-0 left-0 h-full w-full"          
         onClick={handlePlayPause}
@@ -146,7 +145,6 @@ function Player() {
           width="100%"
           ref={playerRef}
           height="90%"
-          // onClick={handlePlayPause}
           playing={isPlaying}
           url={`http://localhost:8080/static/${id}.mp4`}
           volume={volume}
@@ -206,8 +204,6 @@ function Player() {
           </button>
           <button
             onClick={() => {
-              // const newTime = Math.max((progress / 100) * duration - 10, 0);
-              // playerRef.current?.seekTo(newTime);
               handleSeekBtn(10, false)
             }}
             className="h-[70px] w-[20%] text-4xl "
@@ -216,8 +212,6 @@ function Player() {
           </button>
           <button
             onClick={() => {
-              // const newTime = Math.min((progress / 100) * duration + 10, duration);
-              // playerRef.current?.seekTo(newTime);
               handleSeekBtn(10, true)
             }}
             className="h-[70px] w-[20%] text-4xl "
@@ -275,6 +269,18 @@ function Player() {
         </button>
         </div>
         
+      </div>
+      <div 
+        className={`  text-3xl absolute w-full h-[55px] ${viser ? "flex" : "hidden"} top-[0px] `}
+      >
+        <button
+        className=" w-[55px] h-[55px]  "
+          onClick={() => {
+            navigate("/")
+          }}
+        >
+          X
+        </button>
       </div>
     </main>
   )
